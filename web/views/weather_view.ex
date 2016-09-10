@@ -5,4 +5,8 @@ defmodule Anka.WeatherView do
   def render("index.json", %{temp: output}) do
     %{data: output}
   end
+
+  def render("create.json", %{}) do
+    %{}
+  end
 end
