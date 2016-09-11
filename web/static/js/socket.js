@@ -56,14 +56,24 @@ socket.connect()
 // Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("weather:temp", {})
 
+function displayTemperature(temp) {
+   document.getElementById("temp").innerHTML = temp;
+}
+
 channel.on("new_temp", (resp) => {
   console.log("new_temp received", resp);
-  document.getElementById("temp").innerHTML = resp.temp;
+  displayTemperature(resp.temp);
 });
 
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+  .receive("ok", temperature => {
+    console.log("Joined successfully", temperature);
+    displayTemperature(temperature);
+  })
+  .receive("error", resp => {
+    console.log("Unable to join", resp);
+    displayTemperature("error");
+  })
 
 
 

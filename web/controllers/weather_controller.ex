@@ -2,18 +2,14 @@ defmodule Anka.WeatherController do
   use Anka.Web, :controller
   require Logger
 
-  @appid "eab7a29606869161391061174665cefc"
-  @httpc :httpc
-
   def index(conn, _params) do
-   render conn, [temp: 23.5]
+    temp = Anka.WeatherData.get_temp(Anka.WeatherData)
+    Anka.Endpoint.broadcast "weather:temp", "new_temp", %{temp: temp}
+    render conn, [temp: temp]
   end
 
   def create(conn, _param) do
-    {:ok, {{_, 200, _}, _, body}} = @httpc.request(String.to_char_list("http://api.openweathermap.org/data/2.5/weather?q=Stockholm&appid=#{@appid}"))
-    %{"main" => %{"temp" => temp}} = Poison.decode!(body)
-    Logger.info("temperature (kelvin) #{inspect temp}")
-    Anka.Endpoint.broadcast "weather:temp", "new_temp", %{temp: temp - 273.15}
+    Anka.WeatherData.update_temperature(Anka.WeatherData)
     render conn, []
   end
 end
