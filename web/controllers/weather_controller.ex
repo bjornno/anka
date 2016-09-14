@@ -11,7 +11,7 @@ defmodule Anka.WeatherController do
   def create(conn, _param) do
     %{"actorId" => _, "created" => _, "data" => %{"created" => _, "id" => message_id, "personEmail" => sender_email, "personId" => _, "roomId" => _, "roomType" => _}, "event" => "created", "id" => _, "name" => "anka", "resource" => "messages", "targetUrl" => "https://fast-stream-59170.herokuapp.com/api/weather"} = _param
 
-    unless "kalle@sparkbot.io" = sender_email do
+    unless sender_email == "kalle@sparkbot.io" do
       query = Anka.Spark.evaluate(message_id)
       luis_result = Anka.Luis.evaluate(query)
       case luis_result do
