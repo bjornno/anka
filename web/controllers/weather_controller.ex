@@ -12,7 +12,7 @@ defmodule Anka.WeatherController do
     %{"actorId" => _, "created" => _, "data" => %{"created" => _, "id" => _, "personEmail" => sender_email, "personId" => _, "roomId" => _, "roomType" => _}, "event" => "created", "id" => message_id, "name" => "anka", "resource" => "messages", "targetUrl" => "https://fast-stream-59170.herokuapp.com/api/weather"} = _param
 
     url = "https://api.ciscospark.com/v1/messages/#{message_id}"
-    {:ok, {{_, 200, _}, _, body}} = :httpc.request(:get, {String.to_char_list(url), []}, [{:authorization,"Bearer NmYxNTBlZTYtZjU4ZS00MTU2LTlkNWUtNzc3MjQ3MjQ5MjJlNjUyYTJhNDQtMWI1"}], [])
+    {:ok, {{_, 200, _}, _, body}} = :httpc.request(:get, {String.to_char_list(url), []}, [{"Authorization", "Bearer NmYxNTBlZTYtZjU4ZS00MTU2LTlkNWUtNzc3MjQ3MjQ5MjJlNjUyYTJhNDQtMWI1"}], [])
     
     decoded = Poison.decode!(body)
     Logger.info(decoded)
