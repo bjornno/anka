@@ -18,7 +18,7 @@ defmodule Anka.WeatherController do
         ["weather", place] -> 
           Anka.WeatherData.update_temperature(Anka.WeatherData, place)
           temp = Anka.WeatherData.get_temp(Anka.WeatherData)
-          Anka.Endpoint.broadcast "weather:temp", "new_temp", %{temp: temp}
+          Anka.Endpoint.broadcast "weather:temp", "new_temp", %{temp: "temperature in #{place} is: #{temp} asked by #{sender_email}"}
         false ->
           Anka.Endpoint.broadcast "weather:temp", "new_temp", %{temp: "did not understand the question"}
       end
