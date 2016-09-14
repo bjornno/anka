@@ -13,9 +13,7 @@ defmodule Anka.WeatherController do
 
     url = "https://api.ciscospark.com/v1/messages/#{message_id}"
 
-#    :httpc.request(:get, {String.to_char_list(url), []}, [{:ssl,[{:verify,0}]}], [])
-
-    {:ok, {{_, 200, _}, _, body}} = :httpc.request(:get, {String.to_char_list(url), []}, [{:headers, [{"Authorization", "Bearer NmYxNTBlZTYtZjU4ZS00MTU2LTlkNWUtNzc3MjQ3MjQ5MjJlNjUyYTJhNDQtMWI1"}]}], [])
+    {:ok, {{_, 200, _}, _, body}} = :httpc.request(:get, {String.to_char_list(url), [{'Authorization', 'Bearer NmYxNTBlZTYtZjU4ZS00MTU2LTlkNWUtNzc3MjQ3MjQ5MjJlNjUyYTJhNDQtMWI1'}]}, [], [])
     
     decoded = Poison.decode!(body)
     Logger.info(decoded)
