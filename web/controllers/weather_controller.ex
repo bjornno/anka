@@ -17,6 +17,7 @@ defmodule Anka.WeatherController do
     decoded = Poison.decode!(body)
     Logger.info(decoded)
 
+    query = decoded
     luis_result = Anka.Luis.evaluate(query)
     case luis_result do
       ["weather", place] -> 
