@@ -17,7 +17,7 @@ defmodule Anka.WeatherController do
     
     decoded = Poison.decode!(body)
 
-    %{"created" => _, "id" => "_, "personEmail" => person_email, "personId" => _, "roomId" => _, "roomType" => _, "text" => query} = decoded
+    %{"created" => _, "id" => _, "personEmail" => person_email, "personId" => _, "roomId" => _, "roomType" => _, "text" => query} = decoded
 
     luis_result = Anka.Luis.evaluate(query)
     case luis_result do
