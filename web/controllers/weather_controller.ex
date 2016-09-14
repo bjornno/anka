@@ -9,7 +9,7 @@ defmodule Anka.WeatherController do
   end
 
   def create(conn, _param) do
-    %{"actorId" => _, "created" => _, "data" => %{"created" => _, "id" => _, "personEmail" => sender_email, "personId" => _, "roomId" => _, "roomType" => _}, "event" => "created", "id" => message_id, "name" => "anka", "resource" => "messages", "targetUrl" => "https://fast-stream-59170.herokuapp.com/api/weather"} = _param
+    %{"actorId" => _, "created" => _, "data" => %{"created" => _, "id" => message_id, "personEmail" => sender_email, "personId" => _, "roomId" => _, "roomType" => _}, "event" => "created", "id" => _, "name" => "anka", "resource" => "messages", "targetUrl" => "https://fast-stream-59170.herokuapp.com/api/weather"} = _param
 
     url = "https://api.ciscospark.com/v1/messages/#{message_id}"
 
